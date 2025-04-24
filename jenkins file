@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git url: 'https://github.com/yourusername/ansible-nginx-deploy.git', branch: 'main'
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                sh 'ansible-playbook -i inventory/hosts playbooks/install_nginx.yml'
+            }
+        }
+    }
+}
